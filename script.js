@@ -23,14 +23,19 @@ enterBtn.addEventListener("click", async () => {
   createMainEffects();
 
   // Music starts after user's tap
-  try {
-    await birthdaySong.play();
+  birthdaySong.volume = 1;
+birthdaySong.muted = false;
+
+birthdaySong.play()
+  .then(() => {
     musicPlaying = true;
     musicBtn.textContent = "🔊";
-  } catch (error) {
+  })
+  .catch((error) => {
+    console.log("Music play error:", error);
     musicPlaying = false;
-    musicBtn.textContent = "🔇";
-  }
+    musicBtn.textContent = "▶️";
+  });
 
   // Birthday confetti
   createConfetti(90);
